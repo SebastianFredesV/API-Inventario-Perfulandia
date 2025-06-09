@@ -22,6 +22,7 @@ public class InventarioService {
     }
 
     public List<InventarioDTO> listar() {
+        System.out.println("✅ Método listar() ejecutado");
         return repository.findAll().stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());
