@@ -39,7 +39,7 @@ public class InventarioController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/ajuste/{id}")
     public ResponseEntity<InventarioDTO> actualizar(@PathVariable Integer id, @RequestBody InventarioDTO dto) {
         return service.actualizar(id, dto)
                 .map(ResponseEntity::ok)
