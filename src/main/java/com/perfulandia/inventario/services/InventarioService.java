@@ -3,8 +3,11 @@ package com.perfulandia.inventario.services;
 import com.perfulandia.inventario.dto.InventarioDTO;
 import com.perfulandia.inventario.models.Inventario;
 import com.perfulandia.inventario.repository.InventarioRepository;
+import com.perfulandia.inventario.controller.InventarioController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.util.List;
 import java.util.Optional;
@@ -59,6 +62,11 @@ public class InventarioService {
         dto.setIdProducto(entity.getIdProducto());
         dto.setCantidadDisponible(entity.getCantidadDisponible());
         dto.setUbicacionBodega(entity.getUbicacionBodega());
+        
+        // HATEOAS
+        dto.add(linkTo(methodOn(InventarioController.class).obtenerPorId(entity.getIdInventario())).withSelfRel());
+        dto.add(linkTo(methodOn(InventarioController.class).listar()).withRel("Todos"));
+
         return dto;
     }
 
